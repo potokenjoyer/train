@@ -1,7 +1,7 @@
 <template>
   <div class="container pt-5">
     <div class="card">
-      <h1>Счетчик: {{ count }}</h1>
+      <h1>{{ message }} {{ count }}</h1>
       <div class="btn_holder">
         <button @click="plus" class="btn primary">+</button>
         <button @click="minus" class="btn danger">-</button>
@@ -11,7 +11,7 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { reactive, ref } from "vue";
 const count = ref(0);
 
 function plus() {
@@ -22,6 +22,8 @@ function minus() {
     count.value--;
   }
 }
+
+const message = reactive("Количество:");
 </script>
 
 <style>
