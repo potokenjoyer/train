@@ -1,0 +1,18 @@
+
+@import './base.css';
+
+#app {
+  margin: 0 auto;
+  font-weight: normal;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+@media (min-width: 1024px) {
+  body {
+    display: flex;
+  }
+}
+
+
