@@ -8,6 +8,7 @@
       </div>
     </div>
     <div class="form-control">
+      <h1>{{ todosName }}</h1>
       <input type="text" />
     </div>
     <button class="btn-add">Добавить</button>
@@ -18,6 +19,7 @@
 <script setup>
 import { reactive, ref } from "vue";
 const count = ref(0);
+const message = reactive("Количество:");
 
 function plus() {
   count.value++;
@@ -28,10 +30,11 @@ function minus() {
   }
 }
 
-const message = reactive("Количество:");
+const todosName = ref("Todo-list");
 </script>
 
 <style>
+
 .btn-add {
   color: #42b983;
   position: relative;
@@ -61,7 +64,7 @@ const message = reactive("Количество:");
 }
 
 .form-control input {
-  margin-top: 2rem;
+  margin-top: 0.5rem;
   outline: none;
   border: 2px solid #ccc;
   display: block;
@@ -151,6 +154,7 @@ h1 {
   padding: 1rem;
   border-radius: 10px;
   box-shadow: 2px 3px 10px rgba(22, 255, 80, 0.2);
+  margin-bottom: 2rem;
 }
 
 hr {
