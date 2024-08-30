@@ -1,21 +1,7 @@
-<script setup>
-import { ref } from 'vue';
-const count =ref(0)
-
-function plus(){
-  count.value++
-}
-function minus(){
-  if(count.value>0){
-  count.value--
-}
-}
-</script>
-
 <template>
   <div class="container pt-5">
     <div class="card">
-      <h1>Счетчик: {{count}}</h1>
+      <h1>Счетчик: {{ count }}</h1>
       <div class="btn_holder">
         <button @click="plus" class="btn primary">+</button>
         <button @click="minus" class="btn danger">-</button>
@@ -24,64 +10,32 @@ function minus(){
   </div>
 </template>
 
-<style>
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap");
+<script setup>
+import { ref } from "vue";
+const count = ref(0);
 
+function plus() {
+  count.value++;
+}
+function minus() {
+  if (count.value > 0) {
+    count.value--;
+  }
+}
+</script>
+
+<style>
 * {
   box-sizing: border-box;
 }
 
 body {
-  font-family: Inter, Roboto, Oxygen, Fira Sans, Helvetica Neue, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
   font-size: 16px;
-}
-
-hr {
-  margin: 1rem 0;
-}
-
-strong,
-.bold {
-  font-weight: 500;
-}
-
-ol,
-p,
-ul {
-  line-height: 1.7;
-}
-
-a {
-  color: #3eaf7c;
-  font-weight: 500;
-  text-decoration: none;
-}
-
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  font-weight: 500;
-  line-height: 1.45;
 }
 
 h1 {
   font-size: 2.2rem;
   font-weight: 600;
-}
-
-h2 {
-  font-size: 1.65rem;
-  padding-bottom: 0.3rem;
-  border-bottom: 1px solid #eaecef;
-}
-
-h3 {
-  font-size: 1.35rem;
 }
 
 .primary {
@@ -141,57 +95,9 @@ h3 {
   padding-top: 5rem;
 }
 
-.form-control {
-  position: relative;
-  margin-bottom: 0.5rem;
-}
-
-.form-control input {
-  margin: 0;
-  outline: none;
-  border: 2px solid #ccc;
-  display: block;
-  width: 100%;
-  color: #2c3e50;
-  padding: 0.5rem 1.5rem;
-  border-radius: 3px;
-  font-size: 1rem;
-}
-
-.form-control label {
-  display: block;
-  margin: 0 0 0.3rem 0.3rem;
-  font-weight: 500;
-}
-
-.form-control input:active,
-.form-control input:focus {
-  transition: border 0.22s;
-  border: 2px solid #42b983;
-}
-
 .card {
   padding: 1rem;
   border-radius: 10px;
   box-shadow: 2px 3px 10px rgba(22, 255, 80, 0.2);
-}
-
-.card.center {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.list {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
-
-.list-item {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0.5rem 0;
 }
 </style>
