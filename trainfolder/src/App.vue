@@ -9,7 +9,7 @@
     </div>
     <div class="form-control">
       <h1>{{ todosName }}</h1>
-      <input type="text" />
+      <input type="text" v-bind:placeholder="placeholderString" />
     </div>
     <button class="btn-add">Добавить</button>
     <hr />
@@ -31,6 +31,10 @@ function minus() {
 }
 
 const todosName = ref("Todo-list");
+
+const placeholderString= ref('Введите заметку')
+
+
 </script>
 
 <style>
