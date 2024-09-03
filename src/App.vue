@@ -10,7 +10,7 @@
     <div class="form-control">
       <h1>{{ todosName }}</h1>
       <input
-        type="text"
+        type='text'
         v-bind:placeholder="placeholderString"
         v-model="newTodo"
       />
@@ -21,7 +21,7 @@
     </form>
     <ul class="list">
       <li class="list-item" v-for="(todo,idx) in notes">
-        {{ idx }} {{ todo.noteText }}
+        {{ todo.noteText }}
         <button class="btn-dlt" @click="deleteTodo(idx)">Delete</button>
       </li>
     </ul>
