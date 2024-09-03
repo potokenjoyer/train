@@ -1,18 +1,18 @@
 <template>
   <div class="container pt-5">
     <div class="card">
-      <h1>{{ message }} {{ count }}</h1>
+      <h1>Количество: {{ count }}</h1>
       <div class="btn_holder">
         <button @click="plus" class="btn primary">+</button>
         <button @click="minus" class="btn danger">-</button>
       </div>
     </div>
     <div class="form-control">
-      <h1>{{ todosName }}</h1>
+      <h1>Todo-list</h1>
       <form @submit.prevent="addTodo">
       <input
         type='text'
-        v-bind:placeholder="placeholderString"
+        placeholder="Введите заметку"
         v-model="newTodo"
       />
       <button class="btn-add">Add</button>
@@ -45,7 +45,6 @@ const notes = ref([])
  }
 
 const count = ref(0);
-const message = "Количество:";
 
 function plus() {
   count.value++;
@@ -56,9 +55,6 @@ function minus() {
   }
 }
 
-const todosName = ref("Todo-list");
-
-const placeholderString = ref("Введите заметку");
 
 
 </script>
