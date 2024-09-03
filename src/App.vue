@@ -9,16 +9,17 @@
     </div>
     <div class="form-control">
       <h1>{{ todosName }}</h1>
+      <form @submit.prevent="addTodo">
       <input
         type='text'
         v-bind:placeholder="placeholderString"
         v-model="newTodo"
       />
-    </div>
-    <form @submit.prevent="addTodo">
       <button class="btn-add">Add</button>
       <hr />
     </form>
+    </div>
+
     <ul class="list">
       <li class="list-item" v-for="(todo,idx) in notes">
         {{ todo.noteText }}
