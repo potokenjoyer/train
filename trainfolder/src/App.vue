@@ -15,8 +15,10 @@
         v-model="newTodo"
       />
     </div>
-    <button class="btn-add" @click="addTodo">Add</button>
-    <hr />
+    <form @submit.prevent="addTodo">
+      <button class="btn-add">Add</button>
+      <hr />
+    </form>
     <ul class="list">
       <li class="list-item" v-for="(todo,idx) in notes">
         {{ idx }} {{ todo.noteText }}
