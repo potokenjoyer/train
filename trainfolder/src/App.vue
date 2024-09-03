@@ -18,9 +18,9 @@
     <button class="btn-add" @click="addTodo">Add</button>
     <hr />
     <ul class="list">
-      <li class="list-item" v-for="todo in notes">
-        {{ todo.noteText }}
-        <button class="btn-dlt" @click="deleteTodo">Delete</button>
+      <li class="list-item" v-for="(todo,idx) in notes">
+        {{ idx }} {{ todo.noteText }}
+        <button class="btn-dlt" @click="deleteTodo(idx,)">Delete</button>
       </li>
     </ul>
 
@@ -30,15 +30,15 @@
 <script setup>
 import { reactive, ref } from "vue";
 
-let id = 0
+
 const newTodo= ref('')
 const notes = ref([])
 
  function addTodo(){
-  notes.value.push({id:id++, noteText: newTodo.value})
+  notes.value.push({noteText: newTodo.value})
  }
- function deleteTodo(){
-  console.log('Work!')
+ function deleteTodo(idx){
+  this.notes.splice(idx, 1)
  }
 
 const count = ref(0);
