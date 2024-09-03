@@ -9,17 +9,40 @@
     </div>
     <div class="form-control">
       <h1>{{ todosName }}</h1>
-      <input type="text" v-bind:placeholder="placeholderString" />
+      <input
+        type="text"
+        v-bind:placeholder="placeholderString"
+        v-model="newTodo"
+      />
     </div>
-    <button class="btn-add">Добавить</button>
+    <button class="btn-add" @click="addTodo">Add</button>
     <hr />
+    <ul class="list">
+      <li class="list-item" v-for="todo in notes">
+        {{ todo.noteText }}
+        <button class="btn-dlt" @click="deleteTodo">Delete</button>
+      </li>
+    </ul>
+
   </div>
 </template>
 
 <script setup>
 import { reactive, ref } from "vue";
+
+let id = 0
+const newTodo= ref('')
+const notes = ref([])
+
+ function addTodo(){
+  notes.value.push({id:id++, noteText: newTodo.value})
+ }
+ function deleteTodo(){
+  console.log('Work!')
+ }
+
 const count = ref(0);
-const message = reactive("Количество:");
+const message = "Количество:";
 
 function plus() {
   count.value++;
@@ -32,22 +55,35 @@ function minus() {
 
 const todosName = ref("Todo-list");
 
-const placeholderString= ref('Введите заметку')
+const placeholderString = ref("Введите заметку");
 
 
 </script>
 
 <style>
+.list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.list-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 0;
+  font-size: 24px;
+}
 
 .btn-add {
-  color: #42b983;
+  color: #ffffff;
   position: relative;
   place-content: center;
   place-items: center;
   width: fit-content;
   border-radius: 99px;
   letter-spacing: 0.05em;
-  border: 1px solid #42b983;
+  border: 1px solid #ffffff;
   text-decoration: none;
   text-transform: uppercase;
   margin-top: 2rem;
@@ -55,17 +91,21 @@ const placeholderString= ref('Введите заметку')
   white-space: nowrap;
   font-weight: 700;
   outline: none;
-  background: #fff;
+  background: #42b983;
   transition: all 0.22s;
 }
 .btn-add:hover {
   cursor: pointer;
   opacity: 0.8;
 }
-
+.btn-dlt:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
 .btn:active {
   box-shadow: inset 1px 1px 1px rgba(0, 0, 0, 0.3);
 }
+
 
 .form-control input {
   margin-top: 0.5rem;
@@ -73,10 +113,11 @@ const placeholderString= ref('Введите заметку')
   border: 2px solid #ccc;
   display: block;
   width: 100%;
-  color: #2c3e50;
+  color: #ffffff;
+  background-color: black;
   padding: 0.5rem 1.5rem;
   border-radius: 3px;
-  font-size: 1rem;
+  font-size: 24px;
 }
 
 * {
@@ -91,6 +132,7 @@ h1 {
   font-size: 2.2rem;
   font-weight: 600;
 }
+
 
 .primary {
   color: #42b983;
@@ -117,6 +159,26 @@ h1 {
   font-weight: 700;
   outline: none;
   background: #fff;
+  transition: all 0.22s;
+}
+
+.btn-dlt {
+  color: #ffffff;
+  position: relative;
+  place-content: center;
+  place-items: center;
+  width: fit-content;
+  border-radius: 99px;
+  letter-spacing: 0.05em;
+  border: 1px solid #ffffff;
+  text-decoration: none;
+  text-transform: uppercase;
+  margin-right: 10px;
+  padding: 0.5rem 1.5rem;
+  white-space: nowrap;
+  font-weight: 700;
+  outline: none;
+  background: #9b3030;
   transition: all 0.22s;
 }
 
