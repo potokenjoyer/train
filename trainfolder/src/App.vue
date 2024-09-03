@@ -20,7 +20,7 @@
     <ul class="list">
       <li class="list-item" v-for="(todo,idx) in notes">
         {{ idx }} {{ todo.noteText }}
-        <button class="btn-dlt" @click="deleteTodo(idx,)">Delete</button>
+        <button class="btn-dlt" @click="deleteTodo(idx)">Delete</button>
       </li>
     </ul>
 
