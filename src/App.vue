@@ -14,7 +14,7 @@
     <ul class="list">
       <li class="list-item" v-for="(todo, idx) in notes">
         <div class="div-container">
-          <input type="checkbox" class="checkbox" v-model="todo.done" />
+          <input type="checkbox" class="checkbox-input" v-model="todo.done" />
           <span :class="{ done: todo.done }">
             {{ todo.noteText }}
           </span>
@@ -41,9 +41,11 @@ function deleteTodo(idx) {
 </script>
 
 <style>
+.checkbox-input{
+  margin-right: 10px;
+}
 .div-container{
   display: flex;
-  
 }
 .done {
   text-decoration: line-through;
