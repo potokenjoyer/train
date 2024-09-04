@@ -13,7 +13,12 @@
 
     <ul class="list">
       <li class="list-item" v-for="(todo, idx) in notes">
-        {{ todo.noteText }}
+        <div>
+          <input type="checkbox" class="checkbox" v-model="todo.done" />
+          <span :class="{ done: todo.done }">
+            {{ todo.noteText }}
+          </span>
+        </div>
         <button class="btn-dlt" @click="deleteTodo(idx)">Delete</button>
       </li>
     </ul>
@@ -21,13 +26,13 @@
 </template>
 
 <script setup>
-import { reactive, ref } from "vue";
+import { ref } from "vue";
 
-const newTodo = ref();
+const newTodo = ref("");
 const notes = ref([]);
 
 function addTodo() {
-  notes.value.push({ noteText: newTodo.value });
+  notes.value.push({ noteText: newTodo.value, done: false });
 }
 function deleteTodo(idx) {
   this.notes.splice(idx, 1);
@@ -35,6 +40,9 @@ function deleteTodo(idx) {
 </script>
 
 <style>
+.done {
+  text-decoration: line-through;
+}
 .list {
   margin: 0;
   padding: 0;
