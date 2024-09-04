@@ -1,62 +1,37 @@
 <template>
   <div class="container pt-5">
-    <div class="card">
-      <h1>Количество: {{ count }}</h1>
-      <div class="btn_holder">
-        <button @click="plus" class="btn primary">+</button>
-        <button @click="minus" class="btn danger">-</button>
-      </div>
-    </div>
     <div class="form-control">
       <h1>Todo-list</h1>
       <form @submit.prevent="addTodo">
-      <input
-        type='text'
-        placeholder="Введите заметку"
-        v-model="newTodo"
-      />
-      <button class="btn-add">Add</button>
-      <hr />
-    </form>
+        <input type="text" placeholder="Введите заметку" v-model="newTodo" />
+        <button class="btn-add">Add</button>
+        <hr />
+        <h1>Общее количество: {{ notes.length }}</h1>
+        <hr />
+      </form>
     </div>
 
     <ul class="list">
-      <li class="list-item" v-for="(todo,idx) in notes">
+      <li class="list-item" v-for="(todo, idx) in notes">
         {{ todo.noteText }}
         <button class="btn-dlt" @click="deleteTodo(idx)">Delete</button>
       </li>
     </ul>
-
   </div>
 </template>
 
 <script setup>
 import { reactive, ref } from "vue";
 
+const newTodo = ref();
+const notes = ref([]);
 
-const newTodo= ref('')
-const notes = ref([])
-
- function addTodo(){
-  notes.value.push({noteText: newTodo.value})
- }
- function deleteTodo(idx){
-  this.notes.splice(idx, 1)
- }
-
-const count = ref(0);
-
-function plus() {
-  count.value++;
+function addTodo() {
+  notes.value.push({ noteText: newTodo.value });
 }
-function minus() {
-  if (count.value > 0) {
-    count.value--;
-  }
+function deleteTodo(idx) {
+  this.notes.splice(idx, 1);
 }
-
-
-
 </script>
 
 <style>
@@ -105,7 +80,6 @@ function minus() {
   box-shadow: inset 1px 1px 1px rgba(0, 0, 0, 0.3);
 }
 
-
 .form-control input {
   margin-top: 0.5rem;
   outline: none;
@@ -131,7 +105,6 @@ h1 {
   font-size: 2.2rem;
   font-weight: 600;
 }
-
 
 .primary {
   color: #42b983;
