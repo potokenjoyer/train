@@ -3,7 +3,7 @@
     <div class="form-control">
       <h1>Todo-list</h1>
       <form @submit.prevent="addTodo">
-        <input type="text" placeholder="Введите заметку" v-model="newTodo" />
+        <input type="text"  placeholder="Введите заметку" v-model="newTodo" />
         <button class="btn-add">Add</button>
         <hr />
         <h1>Общее количество: {{ notes.length }}</h1>
@@ -33,6 +33,7 @@ const notes = ref([]);
 
 function addTodo() {
   notes.value.push({ noteText: newTodo.value, done: false });
+  newTodo.value = " ";
 }
 function deleteTodo(idx) {
   this.notes.splice(idx, 1);
