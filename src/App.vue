@@ -3,18 +3,20 @@
     <div class="form-control">
       <h1>Todo-list</h1>
       <form @submit.prevent="addTodo">
-        <input type="text" placeholder="Введите заметку" v-model="newTodo" />
+        <input type="text"  placeholder="Введите заметку" v-model="newTodo" />
         <button class="btn-add">Add</button>
         <hr />
         <h1>Общее количество: {{ notes.length }}</h1>
+        <h1>Сделано: {{ filteredNotes.length }}</h1>
+        <h1>Удалено задач: {{ deletedNotes.length }}</h1>
         <hr />
       </form>
     </div>
 
     <ul class="list">
       <li class="list-item" v-for="(todo, idx) in notes">
-        <div>
-          <input type="checkbox" class="checkbox" v-model="todo.done" />
+        <div class="div-container">
+          <input type="checkbox" class="checkbox-input" v-model="todo.done" />
           <span :class="{ done: todo.done }">
             {{ todo.noteText }}
           </span>
@@ -26,20 +28,36 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, computed } from "vue";
 
 const newTodo = ref("");
 const notes = ref([]);
+const deletedNotes =ref([])
+
 
 function addTodo() {
   notes.value.push({ noteText: newTodo.value, done: false });
+  newTodo.value = " ";
 }
 function deleteTodo(idx) {
   this.notes.splice(idx, 1);
+  deletedNotes.value.push(notes.value.splice(idx,1))
 }
+
+
+const filteredNotes = computed(()=> {
+  return notes.value.filter((note)=> note.done)
+})
+
 </script>
 
 <style>
+.checkbox-input{
+  margin-right: 10px;
+}
+.div-container{
+  display: flex;
+}
 .done {
   text-decoration: line-through;
 }
