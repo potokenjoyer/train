@@ -5,6 +5,7 @@
 
         <hr />
         <h1>Общее количество: {{ notes.length }}</h1>
+        <h1>Сделано: {{filteredNotes.length}}</h1>
         <hr />
     </div>
 
@@ -26,7 +27,7 @@
 </template>
 
 <script setup>
-import { ref, computed } from "vue";
+import { ref, computed} from "vue";
 
 const newTodo = ref("");
 const notes = ref([{ noteText: 123, done: false },{ noteText: 123, done: false },{ noteText: 123, done: false }]);
@@ -40,6 +41,11 @@ function deleteTodo(idx) {
 function archiveTodo(idx){
   return archiveNotes.value.push(notes.value.splice(idx, 1))
 }
+
+const filteredNotes = computed(()=>{
+  return notes.value.filter((note)=>note.done)
+}
+)
 
 
 </script>

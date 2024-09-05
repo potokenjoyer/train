@@ -40,8 +40,10 @@ const deletedNotes =ref([])
 const archiveNotes = ref([])
 
 function addTodo() {
-  notes.value.push({ noteText: newTodo.value, done: false });
-  newTodo.value = " ";
+  if (newTodo.value != ''){
+    notes.value.push({ noteText: newTodo.value, done: false });
+    newTodo.value = "";
+}
 }
 function deleteTodo(idx) {
  return deletedNotes.value.push(notes.value.splice(idx,1))
