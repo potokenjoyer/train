@@ -7,6 +7,8 @@
         <button class="btn-add">Add</button>
         <hr />
         <h1>Общее количество: {{ notes.length }}</h1>
+        <h1>Сделано: {{ filteredNotes.length }}</h1>
+        <h1>Удалено задач: {{ deletedNotes.length }}</h1>
         <hr />
       </form>
     </div>
@@ -26,10 +28,12 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { ref, computed } from "vue";
 
 const newTodo = ref("");
 const notes = ref([]);
+const deletedNotes =ref([])
+
 
 function addTodo() {
   notes.value.push({ noteText: newTodo.value, done: false });
@@ -37,7 +41,14 @@ function addTodo() {
 }
 function deleteTodo(idx) {
   this.notes.splice(idx, 1);
+  deletedNotes.value.push(notes.value.splice(idx,1))
 }
+
+
+const filteredNotes = computed(()=> {
+  return notes.value.filter((note)=> note.done)
+})
+
 </script>
 
 <style>
