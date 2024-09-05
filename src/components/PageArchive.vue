@@ -2,25 +2,41 @@
   <div class="container pt-5">
     <div class="form-control">
       <h1>Todo-list</h1>
-        <hr />
-        <hr />
+      <hr />
+      <hr />
     </div>
 
     <ul class="list">
       <li class="list-item">
         <div class="div-container">
-          <input type="checkbox" class="checkbox-input" >
-          <span>
-            asd
-          </span>
+          <input type="checkbox" class="checkbox-input" />
+          <span> asd </span>
         </div>
         <div>
-        <button class="btn-dlt" @click="deleteTodo(idx)">Delete</button>
-        <button class="btn-return" @click="">Return</button>
-      </div>
+          <button class="btn-dlt" @click="deleteTodo(idx)">Delete</button>
+          <button class="btn-return" @click="">Return</button>
+        </div>
       </li>
-
-
+      <li class="list-item">
+        <div class="div-container">
+          <input type="checkbox" class="checkbox-input" />
+          <span> asd </span>
+        </div>
+        <div>
+          <button class="btn-dlt" @click="deleteTodo(idx)">Delete</button>
+          <button class="btn-return" @click="">Return</button>
+        </div>
+      </li>
+      <li class="list-item">
+        <div class="div-container">
+          <input type="checkbox" class="checkbox-input" />
+          <span> asd </span>
+        </div>
+        <div>
+          <button class="btn-dlt" @click="deleteTodo(idx)">Delete</button>
+          <button class="btn-return" @click="">Return</button>
+        </div>
+      </li>
     </ul>
   </div>
 </template>
@@ -30,25 +46,23 @@ import { ref, computed } from "vue";
 
 const newTodo = ref("");
 const notes = ref([]);
-const deletedNotes =ref([])
+const deletedNotes = ref([]);
 
 function addTodo() {
   notes.value.push({ noteText: newTodo.value, done: false });
   newTodo.value = " ";
 }
 function deleteTodo(idx) {
- return deletedNotes.value.push(notes.value.splice(idx,1))
+  return deletedNotes.value.push(notes.value.splice(idx, 1));
 }
 
-
-const filteredNotes = computed(()=> {
-  return notes.value.filter((note)=> note.done)
-})
-
+const filteredNotes = computed(() => {
+  return notes.value.filter((note) => note.done);
+});
 </script>
 
 <style>
-.btn-return{
+.btn-return {
   color: #ffffff;
   position: relative;
   place-content: center;
@@ -67,10 +81,10 @@ const filteredNotes = computed(()=> {
   background: #42b983;
   transition: all 0.22s;
 }
-.checkbox-input{
+.checkbox-input {
   margin-right: 10px;
 }
-.div-container{
+.div-container {
   display: flex;
 }
 .done {
