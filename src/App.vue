@@ -24,7 +24,6 @@
         <button class="btn-dlt" @click="deleteTodo(idx)">Delete</button>
       </li>
     </ul>
-    <button class="btn-dlt" @click="check"></button>
   </div>
 </template>
 
@@ -35,17 +34,11 @@ const newTodo = ref("");
 const notes = ref([]);
 const deletedNotes =ref([])
 
-
-function check(){
-  console.log(deletedNotes.value)
-}
-
 function addTodo() {
   notes.value.push({ noteText: newTodo.value, done: false });
   newTodo.value = " ";
 }
 function deleteTodo(idx) {
-  // this.notes.splice(idx, 1);
  return deletedNotes.value.push(notes.value.splice(idx,1))
 }
 
