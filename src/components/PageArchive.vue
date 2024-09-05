@@ -2,40 +2,24 @@
   <div class="container pt-5">
     <div class="form-control">
       <h1>Todo-list</h1>
-      <hr />
-      <hr />
+
+        <hr />
+        <h1>Общее количество: {{ notes.length }}</h1>
+        <hr />
     </div>
 
     <ul class="list">
-      <li class="list-item">
+      <li class="list-item" v-for="(todo, idx) in notes">
         <div class="div-container">
-          <input type="checkbox" class="checkbox-input" />
-          <span> asd </span>
+          <input type="checkbox" class="checkbox-input" v-model="todo.done" />
+          <span :class="{ done: todo.done }">
+            {{ todo.noteText }}
+          </span>
         </div>
         <div>
-          <button class="btn-dlt" @click="deleteTodo(idx)">Delete</button>
-          <button class="btn-return" @click="">Return</button>
-        </div>
-      </li>
-      <li class="list-item">
-        <div class="div-container">
-          <input type="checkbox" class="checkbox-input" />
-          <span> asd </span>
-        </div>
-        <div>
-          <button class="btn-dlt" @click="deleteTodo(idx)">Delete</button>
-          <button class="btn-return" @click="">Return</button>
-        </div>
-      </li>
-      <li class="list-item">
-        <div class="div-container">
-          <input type="checkbox" class="checkbox-input" />
-          <span> asd </span>
-        </div>
-        <div>
-          <button class="btn-dlt" @click="deleteTodo(idx)">Delete</button>
-          <button class="btn-return" @click="">Return</button>
-        </div>
+        <button class="btn-arch" @click="archiveTodo(idx)">Return</button>
+        <button class="btn-dlt" @click="deleteTodo(idx)">Delete</button>
+      </div>
       </li>
     </ul>
   </div>
@@ -45,25 +29,24 @@
 import { ref, computed } from "vue";
 
 const newTodo = ref("");
-const notes = ref([]);
-const deletedNotes = ref([]);
+const notes = ref([{ noteText: 123, done: false },{ noteText: 123, done: false },{ noteText: 123, done: false }]);
+const deletedNotes =ref([])
+const archiveNotes = ref([])
 
-function addTodo() {
-  notes.value.push({ noteText: newTodo.value, done: false });
-  newTodo.value = " ";
-}
 function deleteTodo(idx) {
-  return deletedNotes.value.push(notes.value.splice(idx, 1));
+ return deletedNotes.value.push(notes.value.splice(idx,1))
 }
 
-const filteredNotes = computed(() => {
-  return notes.value.filter((note) => note.done);
-});
+function archiveTodo(idx){
+  return archiveNotes.value.push(notes.value.splice(idx, 1))
+}
+
+
 </script>
 
 <style>
-.btn-return {
-  color: #ffffff;
+.btn-arch{
+  color: #000000;
   position: relative;
   place-content: center;
   place-items: center;
@@ -73,18 +56,18 @@ const filteredNotes = computed(() => {
   border: 1px solid #ffffff;
   text-decoration: none;
   text-transform: uppercase;
-  margin-top: 2rem;
+  margin-right: 10px;
   padding: 0.5rem 1.5rem;
   white-space: nowrap;
   font-weight: 700;
   outline: none;
-  background: #42b983;
+  background: #a9a9a9;
   transition: all 0.22s;
 }
-.checkbox-input {
+.checkbox-input{
   margin-right: 10px;
 }
-.div-container {
+.div-container{
   display: flex;
 }
 .done {
@@ -124,6 +107,10 @@ const filteredNotes = computed(() => {
   transition: all 0.22s;
 }
 .btn-add:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+.btn-arch:hover{
   cursor: pointer;
   opacity: 0.8;
 }
