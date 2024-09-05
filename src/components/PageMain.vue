@@ -9,6 +9,7 @@
         <h1>Общее количество: {{ notes.length }}</h1>
         <h1>Сделано: {{ filteredNotes.length }}</h1>
         <h1>Удалено задач: {{ deletedNotes.length }}</h1>
+        <h1>Архивировано задач: {{ archiveNotes.length }}</h1>
         <hr />
       </form>
     </div>
@@ -21,7 +22,10 @@
             {{ todo.noteText }}
           </span>
         </div>
+        <div>
+        <button class="btn-arch" @click="archiveTodo(idx)">Archive</button>
         <button class="btn-dlt" @click="deleteTodo(idx)">Delete</button>
+      </div>
       </li>
     </ul>
   </div>
@@ -33,6 +37,7 @@ import { ref, computed } from "vue";
 const newTodo = ref("");
 const notes = ref([]);
 const deletedNotes =ref([])
+const archiveNotes = ref([])
 
 function addTodo() {
   notes.value.push({ noteText: newTodo.value, done: false });
@@ -42,6 +47,11 @@ function deleteTodo(idx) {
  return deletedNotes.value.push(notes.value.splice(idx,1))
 }
 
+function archiveTodo(idx){
+  return archiveNotes.value.push(notes.value.splice(idx, 1))
+}
+
+
 
 const filteredNotes = computed(()=> {
   return notes.value.filter((note)=> note.done)
@@ -50,6 +60,25 @@ const filteredNotes = computed(()=> {
 </script>
 
 <style>
+.btn-arch{
+  color: #000000;
+  position: relative;
+  place-content: center;
+  place-items: center;
+  width: fit-content;
+  border-radius: 99px;
+  letter-spacing: 0.05em;
+  border: 1px solid #ffffff;
+  text-decoration: none;
+  text-transform: uppercase;
+  margin-right: 10px;
+  padding: 0.5rem 1.5rem;
+  white-space: nowrap;
+  font-weight: 700;
+  outline: none;
+  background: #a9a9a9;
+  transition: all 0.22s;
+}
 .checkbox-input{
   margin-right: 10px;
 }
@@ -93,6 +122,10 @@ const filteredNotes = computed(()=> {
   transition: all 0.22s;
 }
 .btn-add:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+.btn-arch:hover{
   cursor: pointer;
   opacity: 0.8;
 }

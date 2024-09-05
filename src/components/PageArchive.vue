@@ -2,27 +2,25 @@
   <div class="container pt-5">
     <div class="form-control">
       <h1>Todo-list</h1>
-      <form @submit.prevent="addTodo">
-        <input type="text"  placeholder="Введите заметку" v-model="newTodo" />
-        <button class="btn-add">Add</button>
         <hr />
-        <h1>Общее количество: {{ notes.length }}</h1>
-        <h1>Сделано: {{ filteredNotes.length }}</h1>
-        <h1>Удалено задач: {{ deletedNotes.length }}</h1>
         <hr />
-      </form>
     </div>
 
     <ul class="list">
-      <li class="list-item" v-for="(todo, idx) in notes">
+      <li class="list-item">
         <div class="div-container">
-          <input type="checkbox" class="checkbox-input" v-model="todo.done" />
-          <span :class="{ done: todo.done }">
-            {{ todo.noteText }}
+          <input type="checkbox" class="checkbox-input" >
+          <span>
+            asd
           </span>
         </div>
+        <div>
         <button class="btn-dlt" @click="deleteTodo(idx)">Delete</button>
+        <button class="btn-return" @click="">Return</button>
+      </div>
       </li>
+
+
     </ul>
   </div>
 </template>
@@ -50,6 +48,25 @@ const filteredNotes = computed(()=> {
 </script>
 
 <style>
+.btn-return{
+  color: #ffffff;
+  position: relative;
+  place-content: center;
+  place-items: center;
+  width: fit-content;
+  border-radius: 99px;
+  letter-spacing: 0.05em;
+  border: 1px solid #ffffff;
+  text-decoration: none;
+  text-transform: uppercase;
+  margin-top: 2rem;
+  padding: 0.5rem 1.5rem;
+  white-space: nowrap;
+  font-weight: 700;
+  outline: none;
+  background: #42b983;
+  transition: all 0.22s;
+}
 .checkbox-input{
   margin-right: 10px;
 }
