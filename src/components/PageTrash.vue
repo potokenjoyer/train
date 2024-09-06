@@ -12,9 +12,10 @@
         <div class="div-container">
             {{ todo.noteText }}
         </div>
+        <div>
         <button class="btn-return" @click="deleteTodo(idx)">Return</button>
-
         <button class="btn-dlt" @click="deleteTodo(idx)">Delete</button>
+      </div>
       </li>
     </ul>
   </div>
