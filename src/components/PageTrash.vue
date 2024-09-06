@@ -12,6 +12,8 @@
         <div class="div-container">
             {{ todo.noteText }}
         </div>
+        <button class="btn-return" @click="deleteTodo(idx)">Return</button>
+
         <button class="btn-dlt" @click="deleteTodo(idx)">Delete</button>
       </li>
     </ul>
@@ -36,6 +38,25 @@ const filteredNotes = computed(()=> {
 </script>
 
 <style>
+.btn-return{
+  color: #ffffff;
+  position: relative;
+  place-content: center;
+  place-items: center;
+  width: fit-content;
+  border-radius: 99px;
+  letter-spacing: 0.05em;
+  border: 1px solid #ffffff;
+  text-decoration: none;
+  text-transform: uppercase;
+  margin-top: 2rem;
+  padding: 0.5rem 1.5rem;
+  white-space: nowrap;
+  font-weight: 700;
+  outline: none;
+  background: #42b983;
+  transition: all 0.22s;
+}
 .checkbox-input{
   margin-right: 10px;
 }
@@ -85,6 +106,10 @@ const filteredNotes = computed(()=> {
 .btn-dlt:hover {
   cursor: pointer;
   opacity: 0.8;
+}
+.btn-return:hover{
+cursor: pointer;
+opacity: 0.8;
 }
 .btn:active {
   box-shadow: inset 1px 1px 1px rgba(0, 0, 0, 0.3);
