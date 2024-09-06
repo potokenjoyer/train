@@ -1,7 +1,7 @@
 <template>
   <div class="container pt-5">
     <div class="form-control">
-      <h1>Todo-list</h1>
+      <h1>TODO-LIST</h1>
       <form @submit.prevent="addTodo">
         <input type="text"  placeholder="Введите заметку" v-model="newTodo" />
         <button class="btn-add">Add</button>

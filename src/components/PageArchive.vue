@@ -1,12 +1,11 @@
 <template>
   <div class="container pt-5">
     <div class="form-control">
-      <h1>Todo-list</h1>
-
-        <hr />
-        <h1>Общее количество: {{ notes.length }}</h1>
-        <h1>Сделано: {{filteredNotes.length}}</h1>
-        <hr />
+      <h1>ARCHIVE</h1>
+      <hr />
+      <h1>Общее количество: {{ notes.length }}</h1>
+      <h1>Сделано: {{ filteredNotes.length }}</h1>
+      <hr />
     </div>
 
     <ul class="list">
@@ -18,40 +17,41 @@
           </span>
         </div>
         <div>
-        <button class="btn-arch" @click="archiveTodo(idx)">Return</button>
-        <button class="btn-dlt" @click="deleteTodo(idx)">Delete</button>
-      </div>
+          <button class="btn-arch" @click="archiveTodo(idx)">Return</button>
+          <button class="btn-dlt" @click="deleteTodo(idx)">Delete</button>
+        </div>
       </li>
     </ul>
   </div>
 </template>
 
 <script setup>
-import { ref, computed} from "vue";
+import { ref, computed } from "vue";
 
 const newTodo = ref("");
-const notes = ref([{ noteText: 123, done: false },{ noteText: 123, done: false },{ noteText: 123, done: false }]);
-const deletedNotes =ref([])
-const archiveNotes = ref([])
+const notes = ref([
+  { noteText: 123, done: false },
+  { noteText: 123, done: false },
+  { noteText: 123, done: false },
+]);
+const deletedNotes = ref([]);
+const archiveNotes = ref([]);
 
 function deleteTodo(idx) {
- return deletedNotes.value.push(notes.value.splice(idx,1))
+  return deletedNotes.value.push(notes.value.splice(idx, 1));
 }
 
-function archiveTodo(idx){
-  return archiveNotes.value.push(notes.value.splice(idx, 1))
+function archiveTodo(idx) {
+  return archiveNotes.value.push(notes.value.splice(idx, 1));
 }
 
-const filteredNotes = computed(()=>{
-  return notes.value.filter((note)=>note.done)
-}
-)
-
-
+const filteredNotes = computed(() => {
+  return notes.value.filter((note) => note.done);
+});
 </script>
 
 <style>
-.btn-arch{
+.btn-arch {
   color: #000000;
   position: relative;
   place-content: center;
@@ -70,10 +70,10 @@ const filteredNotes = computed(()=>{
   background: #a9a9a9;
   transition: all 0.22s;
 }
-.checkbox-input{
+.checkbox-input {
   margin-right: 10px;
 }
-.div-container{
+.div-container {
   display: flex;
 }
 .done {
@@ -116,7 +116,7 @@ const filteredNotes = computed(()=>{
   cursor: pointer;
   opacity: 0.8;
 }
-.btn-arch:hover{
+.btn-arch:hover {
   cursor: pointer;
   opacity: 0.8;
 }
