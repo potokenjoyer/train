@@ -13,8 +13,8 @@
             {{ todo.noteText }}
         </div>
         <div>
-        <button class="btn-return" @click="deleteTodo(idx)">Return</button>
-        <button class="btn-dlt" @click="deleteTodo(idx)">Delete</button>
+          <button class="btn-ret" @click="archiveTodo(idx)">Return</button>
+          <button class="btn-dlt" @click="deleteTodo(idx)">Delete</button>
       </div>
       </li>
     </ul>
@@ -39,7 +39,7 @@ const filteredNotes = computed(()=> {
 </script>
 
 <style>
-.btn-return{
+.btn-ret {
   color: #ffffff;
   position: relative;
   place-content: center;
@@ -50,7 +50,7 @@ const filteredNotes = computed(()=> {
   border: 1px solid #ffffff;
   text-decoration: none;
   text-transform: uppercase;
-  margin-top: 2rem;
+  margin-right: 10px;
   padding: 0.5rem 1.5rem;
   white-space: nowrap;
   font-weight: 700;
