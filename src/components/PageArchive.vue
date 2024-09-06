@@ -52,7 +52,7 @@ const filteredNotes = computed(() => {
 
 <style>
 .btn-arch {
-  color: #000000;
+  color: #ffffff;
   position: relative;
   place-content: center;
   place-items: center;
@@ -67,7 +67,7 @@ const filteredNotes = computed(() => {
   white-space: nowrap;
   font-weight: 700;
   outline: none;
-  background: #a9a9a9;
+  background: #42b983;
   transition: all 0.22s;
 }
 .checkbox-input {
@@ -117,6 +117,10 @@ const filteredNotes = computed(() => {
   opacity: 0.8;
 }
 .btn-arch:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+.btn-ret:hover {
   cursor: pointer;
   opacity: 0.8;
 }
