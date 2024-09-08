@@ -3,13 +3,14 @@
     <div class="form-control">
       <h1>ARCHIVE</h1>
       <hr />
-      <h1>Общее количество: {{ notes.length }}</h1>
-      <h1>Сделано: {{ filteredNotes.length }}</h1>
+      <!-- <h1>Общее количество: {{ notes.length }}</h1> -->
+      <!-- <h1>Сделано: {{ filteredNotes.length }}</h1> -->
+      <h1>{{notesStore}}</h1>
       <hr />
     </div>
 
     <ul class="list">
-      <li class="list-item" v-for="(todo, idx) in notes">
+      <li class="list-item" v-for="(todo, idx) in notesStore.archiveNotes">
         <div class="div-container">
           <input type="checkbox" class="checkbox-input" v-model="todo.done" />
           <span :class="{ done: todo.done }">
@@ -26,28 +27,22 @@
 </template>
 
 <script setup>
-import { ref, computed } from "vue";
+import { ref} from "vue";
+import { useNotesStores } from "@/stores/notesStore";
 
-const newTodo = ref("");
-const notes = ref([
-  { noteText: 123, done: false },
-  { noteText: 123, done: false },
-  { noteText: 123, done: false },
-]);
+const notesStore = useNotesStores();
+
 const deletedNotes = ref([]);
-const archiveNotes = ref([]);
+
 
 function deleteTodo(idx) {
   return deletedNotes.value.push(notes.value.splice(idx, 1));
 }
 
-function archiveTodo(idx) {
-  return archiveNotes.value.push(notes.value.splice(idx, 1));
-}
 
-const filteredNotes = computed(() => {
-  return notes.value.filter((note) => note.done);
-});
+function returnFromArchive(){
+  
+}
 </script>
 
 <style>
