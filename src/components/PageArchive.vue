@@ -5,12 +5,17 @@
       <hr />
       <!-- <h1>Общее количество: {{ notes.length }}</h1> -->
       <!-- <h1>Сделано: {{ filteredNotes.length }}</h1> -->
-      <h1>{{notesStore}}</h1>
+      <!-- <h1>{{notesStore}}</h1> -->
       <hr />
     </div>
 
     <ul class="list">
-      <li class="list-item" v-for="(todo, idx) in notesStore.archiveNotes">
+      <li
+        class="list-item"
+        v-for="todo in notesStore.notes.filter((item) => {
+          return item.isArchived && item.isDeleted === false;
+        })"
+      >
         <div class="div-container">
           <input type="checkbox" class="checkbox-input" v-model="todo.done" />
           <span :class="{ done: todo.done }">
@@ -18,8 +23,15 @@
           </span>
         </div>
         <div>
-          <button class="btn-arch" @click="archiveTodo(idx)">Return</button>
-          <button class="btn-dlt" @click="deleteTodo(idx)">Delete</button>
+          <button
+            class="btn-arch"
+            @click="notesStore.returnArchivedTodo(todo.id)"
+          >
+            Return
+          </button>
+          <button class="btn-dlt" @click="notesStore.deleteTodo(todo.id)">
+            Delete
+          </button>
         </div>
       </li>
     </ul>
@@ -27,22 +39,26 @@
 </template>
 
 <script setup>
-import { ref} from "vue";
+import { ref } from "vue";
 import { useNotesStores } from "@/stores/notesStore";
 
 const notesStore = useNotesStores();
 
 const deletedNotes = ref([]);
 
-
 function deleteTodo(idx) {
   return deletedNotes.value.push(notes.value.splice(idx, 1));
 }
 
-
-function returnFromArchive(){
-  
-}
+// function filter(array,fn){
+//   const newArray=[]
+//   for (let i = 0; i< array.length; i++ ) {
+//     if (fn(array[i],i)){
+//       newArray.push(array[i])
+//     }
+//   }
+//   return newArray
+// }
 </script>
 
 <style>

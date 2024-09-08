@@ -2,40 +2,39 @@
   <div class="container pt-5">
     <div class="form-control">
       <h1>TRASH</h1>
-        <hr />
-        <h1>Общее количество: {{ notes.length }}</h1>
-        <hr />
+      <hr />
+      <!-- <h1>Общее количество: {{ notes.length }}</h1> -->
+      <hr />
     </div>
 
     <ul class="list">
-      <li class="list-item" v-for="(todo, idx) in notes">
+      <li
+        class="list-item"
+        v-for="todo in notesStore.notes.filter((item) => {
+          return item.isDeleted;
+        })"
+      >
         <div class="div-container">
-            {{ todo.noteText }}
+          {{ todo.noteText }}
         </div>
         <div>
-          <button class="btn-ret" @click="archiveTodo(idx)">Return</button>
-          <button class="btn-dlt" @click="deleteTodo(idx)">Delete</button>
-      </div>
+          <button
+            class="btn-arch"
+            @click="notesStore.returnDeletedTodo(todo.id)"
+          >
+            Return
+          </button>
+          <button class="btn-dlt" @click="notesStore.superDelete(todo.id)">Delete</button>
+        </div>
       </li>
     </ul>
   </div>
 </template>
 
 <script setup>
-import { ref, computed } from "vue";
+import { useNotesStores } from "@/stores/notesStore";
 
-const notes = ref([{ noteText: 'test', done: false },{ noteText: 'test', done: false },{ noteText: 'test', done: false }]);
-const deletedNotes =ref([])
-
-function deleteTodo(idx) {
- return deletedNotes.value.push(notes.value.splice(idx,1))
-}
-
-
-const filteredNotes = computed(()=> {
-  return notes.value.filter((note)=> note.done)
-})
-
+const notesStore = useNotesStores();
 </script>
 
 <style>
@@ -58,10 +57,10 @@ const filteredNotes = computed(()=> {
   background: #42b983;
   transition: all 0.22s;
 }
-.checkbox-input{
+.checkbox-input {
   margin-right: 10px;
 }
-.div-container{
+.div-container {
   display: flex;
 }
 .done {
@@ -108,9 +107,9 @@ const filteredNotes = computed(()=> {
   cursor: pointer;
   opacity: 0.8;
 }
-.btn-return:hover{
-cursor: pointer;
-opacity: 0.8;
+.btn-return:hover {
+  cursor: pointer;
+  opacity: 0.8;
 }
 .btn:active {
   box-shadow: inset 1px 1px 1px rgba(0, 0, 0, 0.3);

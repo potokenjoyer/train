@@ -6,16 +6,19 @@
         <input type="text" placeholder="Введите заметку" v-model="newTodo" />
         <button class="btn-add">Add</button>
         <hr />
-        <!-- <h1>Общее количество: {{ notes.length }}</h1> -->
-        <h1>Сделано: {{ filteredNotes.length }}</h1>
-        <h1>Удалено задач: {{ deletedNotes.length }}</h1>
-        <h1>{{ notesStore }}</h1>
+        <h1>Общее количество: {{ notesStore.notes.length }}</h1>
+        <!-- <h1>Сделано: {{ notesStore }}</h1> -->
         <hr />
       </form>
     </div>
 
     <ul class="list">
-      <li class="list-item" v-for="(todo, idx) in notesStore.notes">
+      <li
+        class="list-item"
+        v-for="todo in notesStore.notes.filter((item) => {
+          return item.isArchived === false && item.isDeleted === false;
+        })"
+      >
         <div class="div-container">
           <input type="checkbox" class="checkbox-input" v-model="todo.done" />
           <span :class="{ done: todo.done }">
@@ -23,10 +26,12 @@
           </span>
         </div>
         <div>
-          <button class="btn-arch" @click="notesStore.archiveTodo(idx)">
+          <button class="btn-arch" @click="notesStore.archiveTodo(todo.id)">
             Archive
           </button>
-          <button class="btn-dlt" @click="deleteTodo(idx)">Delete</button>
+          <button class="btn-dlt" @click="notesStore.deleteTodo(todo.id)">
+            Delete
+          </button>
         </div>
       </li>
     </ul>
@@ -35,22 +40,11 @@
 
 <script setup>
 import { useNotesStores } from "@/stores/notesStore";
-import { ref, computed } from "vue";
+import { ref } from "vue";
 
 const newTodo = ref("");
 
-const deletedNotes = ref([]);
-
 const notesStore = useNotesStores();
-
-
-function deleteTodo(idx) {
-  return deletedNotes.value.push(notes.value.splice(idx, 1));
-}
-
-const filteredNotes = computed(() => {
-  return notesStore.notes.filter((note) => note.done);
-});
 </script>
 
 <style>

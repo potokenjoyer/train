@@ -1,22 +1,50 @@
 import { defineStore } from "pinia";
-import { ref } from "vue";
+import { ref, computed } from "vue";
 export const useNotesStores = defineStore("notes", () => {
   const notes = ref([]);
+  let id = 0;
   function addTodo(newTodo) {
     if (newTodo != "") {
-      notes.value.push({ noteText: newTodo, done: false });
+      notes.value.push({
+        id: id++,
+        noteText: newTodo,
+        done: false,
+        isArchived: false,
+        isDeleted: false,
+      });
       newTodo = "";
     }
   }
-  const archiveNotes = ref([]);
-  function archiveTodo(idx) {
-    return archiveNotes.value.push(...notes.value.splice(idx, 1));   
+
+  function archiveTodo(id) {
+    notes.value.find((element) => element.id === id).isArchived = true;
   }
 
+  function returnArchivedTodo(id) {
+    notes.value.find((element) => element.id === id).isArchived = false;
+  }
+
+  function deleteTodo(id) {
+    notes.value.find((element) => element.id === id).isDeleted = true;
+    notes.value.find((element) => element.id === id).isArchived = false;
+  }
+  function returnDeletedTodo(id) {
+    notes.value.find((element) => element.id === id).isDeleted = false;
+  }
+
+  function superDelete(id){
+    let idx = notes.value.findIndex((element)=> element.id === id)
+    notes.value.splice(idx, 1)
+  }
+
+
   return {
-    archiveNotes,
     archiveTodo,
     notes,
-    addTodo
+    addTodo,
+    returnArchivedTodo,
+    deleteTodo,
+    returnDeletedTodo,
+    superDelete
   };
 });
