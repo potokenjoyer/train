@@ -1,7 +1,8 @@
 <template>
-  <div class="container pt-5">
-    <NavBar />
+  <div class="container">
+
     <div class="form-control">
+      <NavBar />
       <h1>TODO-LIST</h1>
       <form @submit.prevent="notesStore.addTodo(newTodo)">
         <input type="text" placeholder="Введите заметку" v-model="newTodo" />
