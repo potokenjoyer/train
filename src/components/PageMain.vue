@@ -51,18 +51,7 @@
 <script setup>
 import { useNotesStores } from "@/stores/notesStore";
 import { ref } from "vue";
-import { ElButton } from 'element-plus'
-import {
-  Check,
-  Delete,
-  Edit,
-  Message,
-  Search,
-  Star,
-} from '@element-plus/icons-vue'
- const styles ={
-    components: { ElButton },
-  }
+
 
 const newTodo = ref("");
 
