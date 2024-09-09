@@ -36,6 +36,17 @@ export const useNotesStores = defineStore("notes", () => {
     let idx = notes.value.findIndex((element)=> element.id === id)
     notes.value.splice(idx, 1)
   }
+  const filteredNotes = computed(()=>{
+    return notes.value.filter((note)=> note.done)
+  })
+
+  const filteredArchiveNotes = computed(()=>{
+    return notes.value.filter((note)=> note.isArchived)
+  })
+
+  const filteredTrashNotes  = computed(()=>{
+    return notes.value.filter((note)=> note.isDeleted)
+  })
 
 
   return {
@@ -45,6 +56,9 @@ export const useNotesStores = defineStore("notes", () => {
     returnArchivedTodo,
     deleteTodo,
     returnDeletedTodo,
-    superDelete
+    superDelete,
+    filteredNotes,
+    filteredArchiveNotes,
+    filteredTrashNotes
   };
 });

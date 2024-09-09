@@ -3,9 +3,8 @@
     <div class="form-control">
       <h1>ARCHIVE</h1>
       <hr />
-      <!-- <h1>Общее количество: {{ notes.length }}</h1> -->
-      <!-- <h1>Сделано: {{ filteredNotes.length }}</h1> -->
-      <!-- <h1>{{notesStore}}</h1> -->
+      <h1>Общее количество: {{ notesStore.filteredArchiveNotes.length}}</h1>
+      <h1>Общее количество: {{ notesStore.filteredNotes.length}}</h1>
       <hr />
     </div>
 
@@ -44,21 +43,6 @@ import { useNotesStores } from "@/stores/notesStore";
 
 const notesStore = useNotesStores();
 
-const deletedNotes = ref([]);
-
-function deleteTodo(idx) {
-  return deletedNotes.value.push(notes.value.splice(idx, 1));
-}
-
-// function filter(array,fn){
-//   const newArray=[]
-//   for (let i = 0; i< array.length; i++ ) {
-//     if (fn(array[i],i)){
-//       newArray.push(array[i])
-//     }
-//   }
-//   return newArray
-// }
 </script>
 
 <style>

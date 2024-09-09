@@ -7,7 +7,7 @@
         <button class="btn-add">Add</button>
         <hr />
         <h1>Общее количество: {{ notesStore.notes.length }}</h1>
-        <!-- <h1>Сделано: {{ notesStore }}</h1> -->
+        <h1>Сделано: {{ notesStore.filteredNotes.length }}</h1>
         <hr />
       </form>
     </div>
@@ -42,7 +42,7 @@
 import { useNotesStores } from "@/stores/notesStore";
 import { ref } from "vue";
 
-const newTodo = ref("");
+const newTodo = ref(" ");
 
 const notesStore = useNotesStores();
 </script>

@@ -3,7 +3,7 @@
     <div class="form-control">
       <h1>TRASH</h1>
       <hr />
-      <!-- <h1>Общее количество: {{ notes.length }}</h1> -->
+      <h1>Общее количество:{{ notesStore.filteredTrashNotes.length}}</h1>
       <hr />
     </div>
 
