@@ -2,20 +2,23 @@
   <div class="container pt-5">
     <div class="form-control">
       <h1>TODO-LIST</h1>
-      <form @submit.prevent="addTodo">
-        <input type="text"  placeholder="Введите заметку" v-model="newTodo" />
+      <form @submit.prevent="notesStore.addTodo(newTodo)">
+        <input type="text" placeholder="Введите заметку" v-model="newTodo" />
         <button class="btn-add">Add</button>
         <hr />
-        <h1>Общее количество: {{ notes.length }}</h1>
-        <h1>Сделано: {{ filteredNotes.length }}</h1>
-        <h1>Удалено задач: {{ deletedNotes.length }}</h1>
-        <h1>Архивировано задач: {{ archiveNotes.length }}</h1>
+        <h1>Общее количество: {{ notesStore.notes.length }}</h1>
+        <h1>Сделано: {{ notesStore.filteredNotes.length }}</h1>
         <hr />
       </form>
     </div>
 
     <ul class="list">
-      <li class="list-item" v-for="(todo, idx) in notes">
+      <li
+        class="list-item"
+        v-for="todo in notesStore.notes.filter((item) => {
+          return item.isArchived === false && item.isDeleted === false;
+        })"
+      >
         <div class="div-container">
           <input type="checkbox" class="checkbox-input" v-model="todo.done" />
           <span :class="{ done: todo.done }">
@@ -23,46 +26,29 @@
           </span>
         </div>
         <div>
-        <button class="btn-arch" @click="archiveTodo(idx)">Archive</button>
-        <button class="btn-dlt" @click="deleteTodo(idx)">Delete</button>
-      </div>
+          <button class="btn-arch" @click="notesStore.archiveTodo(todo.id)">
+            Archive
+          </button>
+          <button class="btn-dlt" @click="notesStore.deleteTodo(todo.id)">
+            Delete
+          </button>
+        </div>
       </li>
     </ul>
   </div>
 </template>
 
 <script setup>
-import { ref, computed } from "vue";
+import { useNotesStores } from "@/stores/notesStore";
+import { ref } from "vue";
 
-const newTodo = ref("");
-const notes = ref([]);
-const deletedNotes =ref([])
-const archiveNotes = ref([])
+const newTodo = ref(" ");
 
-function addTodo() {
-  if (newTodo.value != ''){
-    notes.value.push({ noteText: newTodo.value, done: false });
-    newTodo.value = "";
-}
-}
-function deleteTodo(idx) {
- return deletedNotes.value.push(notes.value.splice(idx,1))
-}
-
-function archiveTodo(idx){
-  return archiveNotes.value.push(notes.value.splice(idx, 1))
-}
-
-
-
-const filteredNotes = computed(()=> {
-  return notes.value.filter((note)=> note.done)
-})
-
+const notesStore = useNotesStores();
 </script>
 
 <style>
-.btn-arch{
+.btn-arch {
   color: #000000;
   position: relative;
   place-content: center;
@@ -81,10 +67,10 @@ const filteredNotes = computed(()=> {
   background: #a9a9a9;
   transition: all 0.22s;
 }
-.checkbox-input{
+.checkbox-input {
   margin-right: 10px;
 }
-.div-container{
+.div-container {
   display: flex;
 }
 .done {
@@ -127,7 +113,7 @@ const filteredNotes = computed(()=> {
   cursor: pointer;
   opacity: 0.8;
 }
-.btn-arch:hover{
+.btn-arch:hover {
   cursor: pointer;
   opacity: 0.8;
 }

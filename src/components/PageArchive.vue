@@ -3,13 +3,18 @@
     <div class="form-control">
       <h1>ARCHIVE</h1>
       <hr />
-      <h1>Общее количество: {{ notes.length }}</h1>
-      <h1>Сделано: {{ filteredNotes.length }}</h1>
+      <h1>Общее количество: {{ notesStore.filteredArchiveNotes.length}}</h1>
+      <h1>Общее количество: {{ notesStore.filteredNotes.length}}</h1>
       <hr />
     </div>
 
     <ul class="list">
-      <li class="list-item" v-for="(todo, idx) in notes">
+      <li
+        class="list-item"
+        v-for="todo in notesStore.notes.filter((item) => {
+          return item.isArchived && item.isDeleted === false;
+        })"
+      >
         <div class="div-container">
           <input type="checkbox" class="checkbox-input" v-model="todo.done" />
           <span :class="{ done: todo.done }">
@@ -17,8 +22,15 @@
           </span>
         </div>
         <div>
-          <button class="btn-arch" @click="archiveTodo(idx)">Return</button>
-          <button class="btn-dlt" @click="deleteTodo(idx)">Delete</button>
+          <button
+            class="btn-arch"
+            @click="notesStore.returnArchivedTodo(todo.id)"
+          >
+            Return
+          </button>
+          <button class="btn-dlt" @click="notesStore.deleteTodo(todo.id)">
+            Delete
+          </button>
         </div>
       </li>
     </ul>
@@ -26,33 +38,16 @@
 </template>
 
 <script setup>
-import { ref, computed } from "vue";
+import { ref } from "vue";
+import { useNotesStores } from "@/stores/notesStore";
 
-const newTodo = ref("");
-const notes = ref([
-  { noteText: 123, done: false },
-  { noteText: 123, done: false },
-  { noteText: 123, done: false },
-]);
-const deletedNotes = ref([]);
-const archiveNotes = ref([]);
+const notesStore = useNotesStores();
 
-function deleteTodo(idx) {
-  return deletedNotes.value.push(notes.value.splice(idx, 1));
-}
-
-function archiveTodo(idx) {
-  return archiveNotes.value.push(notes.value.splice(idx, 1));
-}
-
-const filteredNotes = computed(() => {
-  return notes.value.filter((note) => note.done);
-});
 </script>
 
 <style>
 .btn-arch {
-  color: #000000;
+  color: #ffffff;
   position: relative;
   place-content: center;
   place-items: center;
@@ -67,7 +62,7 @@ const filteredNotes = computed(() => {
   white-space: nowrap;
   font-weight: 700;
   outline: none;
-  background: #a9a9a9;
+  background: #42b983;
   transition: all 0.22s;
 }
 .checkbox-input {
@@ -117,6 +112,10 @@ const filteredNotes = computed(() => {
   opacity: 0.8;
 }
 .btn-arch:hover {
+  cursor: pointer;
+  opacity: 0.8;
+}
+.btn-ret:hover {
   cursor: pointer;
   opacity: 0.8;
 }
