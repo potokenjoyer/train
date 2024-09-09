@@ -1,5 +1,4 @@
 <template>
-
   <div class="container pt-5">
     <div class="form-control">
       <h1>TODO-LIST</h1>
@@ -13,13 +12,14 @@
       </form>
     </div>
     <div class="mb-4">
-    <el-button>Default</el-button>
-    <el-button type="primary">Primary</el-button>
-    <el-button type="success">Success</el-button>
-    <el-button type="info">Info</el-button>
-    <el-button type="warning">Warning</el-button>
-    <el-button type="danger">Danger</el-button>
-  </div>
+      <el-button>Default</el-button>
+      <el-button type="primary">Primary</el-button>
+      <el-button type="success">Success</el-button>
+      <el-button type="info">Info</el-button>
+      <el-button type="warning">Warning</el-button>
+      <el-button type="danger">Danger</el-button>
+    </div>
+    <NavBar />
 
     <ul class="list">
       <li
@@ -47,19 +47,13 @@
   </div>
 </template>
 
-
 <script setup>
 import { useNotesStores } from "@/stores/notesStore";
 import { ref } from "vue";
-
+import NavBar from "src/components/NavBar.vue";
+const notesStore = useNotesStores();
 
 const newTodo = ref("");
-
-// function clearInput() {
-
-// }
-
-const notesStore = useNotesStores();
 </script>
 
 <style>
