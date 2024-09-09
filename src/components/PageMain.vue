@@ -1,5 +1,6 @@
 <template>
   <div class="container pt-5">
+    <NavBar />
     <div class="form-control">
       <h1>TODO-LIST</h1>
       <form @submit.prevent="notesStore.addTodo(newTodo)">
@@ -19,7 +20,7 @@
       <el-button type="warning">Warning</el-button>
       <el-button type="danger">Danger</el-button>
     </div>
-    <NavBar />
+ 
 
     <ul class="list">
       <li
@@ -50,7 +51,7 @@
 <script setup>
 import { useNotesStores } from "@/stores/notesStore";
 import { ref } from "vue";
-import NavBar from "src/components/NavBar.vue";
+import NavBar from "@/components/NavBar.vue";
 const notesStore = useNotesStores();
 
 const newTodo = ref("");
