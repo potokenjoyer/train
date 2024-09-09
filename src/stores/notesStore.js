@@ -12,8 +12,8 @@ export const useNotesStores = defineStore("notes", () => {
         isArchived: false,
         isDeleted: false,
       });
-      newTodo = "";
     }
+    newTodo = "";
   }
 
   function archiveTodo(id) {

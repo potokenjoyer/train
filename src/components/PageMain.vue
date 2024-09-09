@@ -1,4 +1,5 @@
 <template>
+
   <div class="container pt-5">
     <div class="form-control">
       <h1>TODO-LIST</h1>
@@ -11,6 +12,14 @@
         <hr />
       </form>
     </div>
+    <div class="mb-4">
+    <el-button>Default</el-button>
+    <el-button type="primary">Primary</el-button>
+    <el-button type="success">Success</el-button>
+    <el-button type="info">Info</el-button>
+    <el-button type="warning">Warning</el-button>
+    <el-button type="danger">Danger</el-button>
+  </div>
 
     <ul class="list">
       <li
@@ -38,11 +47,28 @@
   </div>
 </template>
 
+
 <script setup>
 import { useNotesStores } from "@/stores/notesStore";
 import { ref } from "vue";
+import { ElButton } from 'element-plus'
+import {
+  Check,
+  Delete,
+  Edit,
+  Message,
+  Search,
+  Star,
+} from '@element-plus/icons-vue'
+ const styles ={
+    components: { ElButton },
+  }
 
-const newTodo = ref(" ");
+const newTodo = ref("");
+
+// function clearInput() {
+
+// }
 
 const notesStore = useNotesStores();
 </script>
