@@ -1,6 +1,8 @@
 <template>
-  <div class="container pt-5">
+  <div class="container">
+
     <div class="form-control">
+      <NavBar />
       <h1>TODO-LIST</h1>
       <form @submit.prevent="notesStore.addTodo(newTodo)">
         <input type="text" placeholder="Введите заметку" v-model="newTodo" />
@@ -11,6 +13,15 @@
         <hr />
       </form>
     </div>
+    <div class="mb-4">
+      <el-button>Default</el-button>
+      <el-button type="primary">Primary</el-button>
+      <el-button type="success">Success</el-button>
+      <el-button type="info">Info</el-button>
+      <el-button type="warning">Warning</el-button>
+      <el-button type="danger">Danger</el-button>
+    </div>
+ 
 
     <ul class="list">
       <li
@@ -41,10 +52,10 @@
 <script setup>
 import { useNotesStores } from "@/stores/notesStore";
 import { ref } from "vue";
-
-const newTodo = ref(" ");
-
+import NavBar from "@/components/NavBar.vue";
 const notesStore = useNotesStores();
+
+const newTodo = ref("");
 </script>
 
 <style>
