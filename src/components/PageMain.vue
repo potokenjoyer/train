@@ -1,28 +1,40 @@
 <template>
-  <div class="container">
-
-    <div class="form-control">
-      <NavBar />
+  <div class="container pt">
+    <div class="mb-4">
       <h1>TODO-LIST</h1>
+      <div class="mb-5">
+        <el-button
+          type="primary"
+          @click="$router.push('/archive')"
+          circle
+          :icon="Edit"
+          size="large"
+          ></el-button
+        >
+        <el-button
+          type="danger"
+          :icon="Delete"
+          circle
+          size="large"
+          @click="$router.push('/trash')"
+        />
+      </div>
+    </div>
+    <div class="form-control">
       <form @submit.prevent="notesStore.addTodo(newTodo)">
         <input type="text" placeholder="Введите заметку" v-model="newTodo" />
-        <button class="btn-add">Add</button>
+        <el-button
+          type="success"
+          class="btn-add"
+          @click="notesStore.addTodo(newTodo)"
+          >Success</el-button
+        >
         <hr />
         <h1>Общее количество: {{ notesStore.notes.length }}</h1>
         <h1>Сделано: {{ notesStore.filteredNotes.length }}</h1>
         <hr />
       </form>
     </div>
-    <div class="mb-4">
-      <el-button>Default</el-button>
-      <el-button type="primary">Primary</el-button>
-      <el-button type="success">Success</el-button>
-      <el-button type="info">Info</el-button>
-      <el-button type="warning">Warning</el-button>
-      <el-button type="danger">Danger</el-button>
-    </div>
- 
-
     <ul class="list">
       <li
         class="list-item"
@@ -31,18 +43,20 @@
         })"
       >
         <div class="div-container">
-          <input type="checkbox" class="checkbox-input" v-model="todo.done" />
-          <span :class="{ done: todo.done }">
-            {{ todo.noteText }}
-          </span>
+          <div>
+            <input type="checkbox" class="checkbox-input" v-model="todo.done" />
+            <span :class="{ done: todo.done }" class="span-container">
+              {{ todo.noteText }}
+            </span>
+          </div>
         </div>
         <div>
-          <button class="btn-arch" @click="notesStore.archiveTodo(todo.id)">
-            Archive
-          </button>
-          <button class="btn-dlt" @click="notesStore.deleteTodo(todo.id)">
-            Delete
-          </button>
+          <el-button type="primary" @click="notesStore.archiveTodo(todo.id)"
+            >Archive</el-button
+          >
+          <el-button type="danger" @click="notesStore.deleteTodo(todo.id)"
+            >Delete</el-button
+          >
         </div>
       </li>
     </ul>
@@ -53,12 +67,23 @@
 import { useNotesStores } from "@/stores/notesStore";
 import { ref } from "vue";
 import NavBar from "@/components/NavBar.vue";
+import { Delete,Edit } from "@element-plus/icons-vue";
+
 const notesStore = useNotesStores();
 
 const newTodo = ref("");
 </script>
 
 <style>
+.mb-5 {
+  place-content: center;
+  place-items: center;
+}
+.mb-4 {
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: space-between;
+}
 .btn-arch {
   color: #000000;
   position: relative;
@@ -120,14 +145,7 @@ const newTodo = ref("");
   background: #42b983;
   transition: all 0.22s;
 }
-.btn-add:hover {
-  cursor: pointer;
-  opacity: 0.8;
-}
-.btn-arch:hover {
-  cursor: pointer;
-  opacity: 0.8;
-}
+
 .btn-dlt:hover {
   cursor: pointer;
   opacity: 0.8;
@@ -235,12 +253,12 @@ h1 {
   border-color: #e53935;
 }
 
-.pt-5 {
-  padding-top: 5rem;
+.pt {
+  padding-top: 2rem;
 }
 
 .container {
-  width: 50%;
+  width: 100%;
   margin: 0 auto;
   max-width: 1000px;
 }

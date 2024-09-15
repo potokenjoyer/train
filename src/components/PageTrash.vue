@@ -1,5 +1,5 @@
 <template>
-  <div class="container pt-5">
+  <div class="container pt">
     <div class="form-control">
       <h1>TRASH</h1>
       <hr />
