@@ -66,11 +66,9 @@
 <script setup>
 import { useNotesStores } from "@/stores/notesStore";
 import { ref } from "vue";
-import NavBar from "@/components/NavBar.vue";
 import { Delete,Edit } from "@element-plus/icons-vue";
 
 const notesStore = useNotesStores();
-
 const newTodo = ref("");
 </script>
 

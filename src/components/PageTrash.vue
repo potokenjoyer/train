@@ -1,13 +1,34 @@
 <template>
   <div class="container pt">
-    <div class="form-control">
+    <div class="mb-4">
       <h1>TRASH</h1>
+      <div class="mb-5">
+        <el-button
+          type="warning"
+          @click="$router.push('/')"
+          circle
+          :icon="Star"
+          size="large"
+          ></el-button
+        >
+        <el-button
+          type="primary"
+          @click="$router.push('/archive')"
+          circle
+          :icon="Edit"
+          size="large"
+          ></el-button
+        >
+      </div>
+    </div>
+    <div class="form-control">
       <hr />
       <h1>Общее количество:{{ notesStore.filteredTrashNotes.length}}</h1>
       <hr />
     </div>
 
     <ul class="list">
+      
       <li
         class="list-item"
         v-for="todo in notesStore.notes.filter((item) => {
@@ -18,13 +39,12 @@
           {{ todo.noteText }}
         </div>
         <div>
-          <button
-            class="btn-arch"
-            @click="notesStore.returnDeletedTodo(todo.id)"
+          <el-button type="primary"      @click="notesStore.returnDeletedTodo(todo.id)"
+            >Archive</el-button
           >
-            Return
-          </button>
-          <button class="btn-dlt" @click="notesStore.superDelete(todo.id)">Delete</button>
+          <el-button type="danger" @click="notesStore.superDelete(todo.id)"
+            >Delete</el-button
+          >
         </div>
       </li>
     </ul>
@@ -33,6 +53,7 @@
 
 <script setup>
 import { useNotesStores } from "@/stores/notesStore";
+import {Star, Edit } from "@element-plus/icons-vue";
 
 const notesStore = useNotesStores();
 </script>

@@ -1,3 +1,4 @@
+import PageMain from "@/components/PageMain.vue";
 import { defineStore } from "pinia";
 import { ref, computed } from "vue";
 export const useNotesStores = defineStore("notes", () => {
@@ -12,8 +13,7 @@ export const useNotesStores = defineStore("notes", () => {
         isArchived: false,
         isDeleted: false,
       });
-    }
-    newTodo = "";
+    } 
   }
 
   function archiveTodo(id) {
