@@ -1,10 +1,27 @@
 <template>
   <div class="container pt">
-    <div class="form-control">
+    <div class="mb-4">
       <h1>ARCHIVE</h1>
+      <div class="mb-5">
+        <el-button
+          type="warning"
+          @click="$router.push('/')"
+          circle
+          :icon="Star"
+          size="large"
+        ></el-button>
+        <el-button
+          type="danger"
+          :icon="Delete"
+          circle
+          size="large"
+          @click="$router.push('/trash')"
+        />
+      </div>
+    </div>
+    <div class="form-control">
       <hr />
-      <h1>Общее количество: {{ notesStore.filteredArchiveNotes.length}}</h1>
-      <h1>Общее количество: {{ notesStore.filteredNotes.length}}</h1>
+      <h1>Общее количество: {{ notesStore.filteredArchiveNotes.length }}</h1>
       <hr />
     </div>
 
@@ -22,15 +39,14 @@
           </span>
         </div>
         <div>
-          <button
-            class="btn-arch"
+          <el-button
+            type="primary"
             @click="notesStore.returnArchivedTodo(todo.id)"
+            >Return</el-button
           >
-            Return
-          </button>
-          <button class="btn-dlt" @click="notesStore.deleteTodo(todo.id)">
-            Delete
-          </button>
+          <el-button type="danger" @click="notesStore.deleteTodo(todo.id)"
+            >Delete</el-button
+          >
         </div>
       </li>
     </ul>
@@ -38,11 +54,10 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
 import { useNotesStores } from "@/stores/notesStore";
+import { Delete, Star } from "@element-plus/icons-vue";
 
 const notesStore = useNotesStores();
-
 </script>
 
 <style>
